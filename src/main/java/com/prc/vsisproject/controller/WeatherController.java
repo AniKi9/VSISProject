@@ -36,11 +36,7 @@ public class WeatherController {
     }
 
     @PostMapping
-    public String processWeather(@Valid WeatherRequest weatherRequest, @ModelAttribute Weather weather, Errors errors){
-        if (errors.hasErrors()) {
-            return "redirect:/";
-        }
-
+    public String processWeather(@Valid WeatherRequest weatherRequest, @ModelAttribute Weather weather){
         if (weatherRequest.getService().equals("OpenWeatherMap")) {
             weather.setService("OpenWeatherMap");
         } else if (weatherRequest.getService().equals("Gismeteo")) {
