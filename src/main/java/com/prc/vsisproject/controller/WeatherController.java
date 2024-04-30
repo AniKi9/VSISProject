@@ -26,27 +26,27 @@ public class WeatherController {
     }
 
     @ModelAttribute(name = "weatherRequest")
-    public WeatherRequest req(){
+    public WeatherRequest weatherRequest(){
         return new WeatherRequest();
     }
 
     @ModelAttribute(name = "weather")
-    public Weather resp(){
+    public Weather weather(){
         return new Weather();
     }
 
     @PostMapping
-    public String processWeather(@Valid WeatherRequest req, @ModelAttribute Weather weather, Errors errors){
+    public String processWeather(@Valid WeatherRequest weatherRequest, @ModelAttribute Weather weather, Errors errors){
         if (errors.hasErrors()) {
             return "redirect:/";
         }
 
-        if (req.getService().equals("OpenWeatherMap")) {
+        if (weatherRequest.getService().equals("OpenWeatherMap")) {
             weather.setService("OpenWeatherMap");
-        } else if (req.getService().equals("Gismeteo")) {
+        } else if (weatherRequest.getService().equals("Gismeteo")) {
             weather.setService("Gismeteo");
         }
-        weather.setCity(req.getCity());
+        weather.setCity(weatherRequest.getCity());
         return "redirect:/weather";
     }
 }

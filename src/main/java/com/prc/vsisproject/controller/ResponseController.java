@@ -2,15 +2,14 @@ package com.prc.vsisproject.controller;
 
 import com.prc.vsisproject.model.Weather;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/weather")
+@SessionAttributes("weather")
 public class ResponseController {
-    @PostMapping
-    public String weatherForm(@ModelAttribute Weather weather){
+    @GetMapping
+    public String weatherForm(){
         return "weather";
     }
 }
