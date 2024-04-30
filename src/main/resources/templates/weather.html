@@ -4,13 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Результат</title>
+  <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
 <body>
-  <div class="wrap">
+  <div class="cardwrap">
     <form th:action="@{/weather}" method="GET" th:object="${weather}">
-      <h1>Погода в городе <span th:text="*{city}"></span></h1>
-      <p>Погода:</p>
-      <span th:text="*{service}"></span>
+      <div class="form_wrap">
+        <h1>Погода в городе <span th:text="*{city}"></span></h1>
+        <div class="content_wrap">
+          <p>Погода:</p>
+          <span th:text="*{service}"></span>
+        </div>
+      </div>
     </form>
   </div>
 </body>
