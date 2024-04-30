@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Application</title>
+</head>
+<body>
+<h1>Поиск погоды</h1>
+<form th:action="@{/weather}" th:object="${weatherRequest}" method="POST">
+    <label for="city">City:</label>
+    <input type="text" id="city" th:field="*{city}">
+    <span class="validationError"
+          th:if="${#fields.hasErrors('city')}"
+          th:errors="*{city}">City Error</span>
+    <label for="service">Service:</label>
+    <select id="service" th:field="*{service}">
+        <option th:each="service : ${services}" th:value="${service}" th:text="${service}">Service</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+</body>
+</html>

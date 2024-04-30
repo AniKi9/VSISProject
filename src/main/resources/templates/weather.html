@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Результат</title>
+</head>
+<body>
+  <div class="wrap">
+    <form th:action="@{/weather}" method="GET" th:object="${weather}">
+      <h1>Погода в городе <span th:text="*{city}"></span></h1>
+      <p>Погода:</p>
+      <span th:text="*{service}"></span>
+    </form>
+  </div>
+</body>
+</html>
