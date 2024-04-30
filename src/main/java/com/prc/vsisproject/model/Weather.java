@@ -6,5 +6,6 @@ import lombok.Data;
 public class Weather {
     private String city;
     private String service;
-    private String weather;
+    private String temp;
+    private String humidity;
 }
