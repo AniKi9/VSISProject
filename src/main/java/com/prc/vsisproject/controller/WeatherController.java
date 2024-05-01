@@ -46,4 +46,9 @@ public class WeatherController {
         weather.setCity(weatherRequest.getCity());
         return "redirect:/weather";
     }
+
+    @GetMapping("/weather")
+    public String weatherForm(){
+        return "weather";
+    }
 }
