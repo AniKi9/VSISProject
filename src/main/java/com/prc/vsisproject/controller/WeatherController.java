@@ -2,9 +2,11 @@ package com.prc.vsisproject.controller;
 
 import com.prc.vsisproject.model.GisWeather;
 import com.prc.vsisproject.model.OWMweather;
+import com.prc.vsisproject.model.VCWeather;
 import com.prc.vsisproject.model.WeatherRequest;
 import com.prc.vsisproject.service.GisService;
 import com.prc.vsisproject.service.OWMService;
+import com.prc.vsisproject.service.VCService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -28,8 +30,8 @@ public class WeatherController {
 
     @ModelAttribute
     public void model(Model model){
-        model.addAttribute("services", new String[]{"OpenWeatherMap", "Gismeteo"});
-        model.addAttribute("image", "images/" + (int)(Math.round(Math.random()*2)+1) + ".jpg");
+        model.addAttribute("services", new String[]{"OpenWeatherMap", "VC Weather", "Gismeteo"});
+        model.addAttribute("image", "images/" + (int)(Math.round(Math.random()*6)+1) + ".jpg");
     }
 
     @ModelAttribute(name = "weatherRequest")
@@ -49,6 +51,11 @@ public class WeatherController {
             GisWeather gisWeather = gisService.getWeather(weatherRequest.getCity());
             model.addAttribute("weather", gisWeather);
             return "redirect:/weather2";
+        } else if (weatherRequest.getService().equals("VC Weather")){
+            VCService vcService = new VCService(restTemplate);
+            VCWeather vcWeather = vcService.getWeather(weatherRequest.getCity());
+            model.addAttribute("weather", vcWeather);
+            return "redirect:/weather3";
         }
         return "redirect:/";
     }
@@ -56,5 +63,13 @@ public class WeatherController {
     @GetMapping("/weather")
     public String weatherForm(){
         return "weather";
+    }
+    @GetMapping("/weather2")
+    public String weather2Form(){
+        return "weather2";
+    }
+    @GetMapping("/weather3")
+    public String weather3Form(){
+        return "weather3";
     }
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Результат</title>
+  <link rel="stylesheet" th:href="@{/styles/style.css}">
+</head>
+<body>
+  <div class="bg">
+    <img th:src="${image}" alt="Background" class="bgimg">
+    <div class="bgcolor"></div>
+  </div>
+  <div class="main_wrap">
+    <div class="cardwrap">
+      <form th:action="@{/weather3}" method="GET" th:object="${weather}">
+        <div class="form_wrap">
+          <h1>Погода в городе <span th:text="*{address}"></span></h1>
+          <br>
+          <div class="content_wrap">
+            <p>Температура: <span th:text="*{currentConditions.temp}"></span> °F</p>
+          </div>
+          <div class="content_wrap">
+            <p>Влажность: <span th:text="*{currentConditions.humidity}"></span> %</p>
+          </div>
+          <div class="content_wrap">
+            <p>Cервис: Virtual Crossing Weather</p>
+          </div>
+          <div class="button">
+            <a class="c_button" th:href="@{/}">Обратно</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

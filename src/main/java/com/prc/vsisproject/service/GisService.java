@@ -27,7 +27,7 @@ public class GisService {
         return response.getBody().getId();
     }
     public GisWeather getWeather(String city){
-        String url = weatherUrl + getId(city) + "&lang=ru";
+        String url = weatherUrl + getId(city) + "/?lang=ru";
         headers.set("X-Gismeteo-Token", API_KEY);
         HttpEntity<GisWeather> entity = new HttpEntity<>(headers);
         ResponseEntity<GisWeather> response = restTemplate.exchange(url, HttpMethod.GET, entity, GisWeather.class);
