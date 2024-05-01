@@ -7,27 +7,33 @@
     <link th:rel="stylesheet" th:href="@{/styles/style.css}" />
 </head>
 <body>
-    <div class="cardwrap">
-        <h1>Поиск погоды</h1>
-        <form th:object="${weatherRequest}" method="POST">
-            <div class="form_wrap">
-                <div class="content_wrap">
-                    <label for="city">Город:</label>
-                    <br>
-                    <input type="text" id="city" th:field="*{city}" required>
+    <div class="bg">
+        <img th:src="${image}" alt="Background" class="bgimg">
+        <div class="bgcolor"></div>
+    </div>
+    <div class="main_wrap">
+        <div class="cardwrap">
+            <h1>Поиск погоды</h1>
+            <form th:object="${weatherRequest}" method="POST">
+                <div class="form_wrap">
+                    <div class="content_wrap">
+                        <label for="city">Город:</label>
+                        <br>
+                        <input type="text" id="city" th:field="*{city}" required>
+                    </div>
+                    <div class="content_wrap">
+                        <label for="service">Сервис:</label>
+                        <br>
+                        <select id="service" th:field="*{service}">
+                            <option th:each="service : ${services}" th:value="${service}" th:text="${service}">Service</option>
+                        </select>
+                    </div>
+                    <div class="button">
+                        <button type="submit" class="c_button">Поиск</button>
+                    </div>
                 </div>
-                <div class="content_wrap">
-                    <label for="service">Сервис:</label>
-                    <br>
-                    <select id="service" th:field="*{service}">
-                        <option th:each="service : ${services}" th:value="${service}" th:text="${service}">Service</option>
-                    </select>
-                </div>
-                <div class="button">
-                    <button type="submit">Поиск</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </body>
 </html>

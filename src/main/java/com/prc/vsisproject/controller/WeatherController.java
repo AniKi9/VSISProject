@@ -4,9 +4,9 @@ import com.prc.vsisproject.model.Weather;
 import com.prc.vsisproject.model.WeatherRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -23,6 +23,7 @@ public class WeatherController {
     @ModelAttribute
     public void model(Model model){
         model.addAttribute("services", new String[]{"OpenWeatherMap", "Gismeteo"});
+        model.addAttribute("image", "images/" + (int)(Math.round(Math.random()*2)+1) + ".jpg");
     }
 
     @ModelAttribute(name = "weatherRequest")
