@@ -2,19 +2,25 @@ package com.prc.vsisproject.controller;
 
 import com.prc.vsisproject.model.Weather;
 import com.prc.vsisproject.model.WeatherRequest;
+import com.prc.vsisproject.service.OWMService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Controller
 @RequestMapping("/")
 @SessionAttributes("weather")
 public class WeatherController {
-
+    final RestTemplate restTemplate;
+    WeatherController(RestTemplate restTemplate){
+        this.restTemplate = restTemplate;
+    }
     @GetMapping
     public String indexForm(){
         return "index";
@@ -37,13 +43,13 @@ public class WeatherController {
     }
 
     @PostMapping
-    public String processWeather(@Valid WeatherRequest weatherRequest, @ModelAttribute Weather weather){
+    public String processWeather(@Valid WeatherRequest weatherRequest, Model model){
         if (weatherRequest.getService().equals("OpenWeatherMap")) {
-            weather.setService("OpenWeatherMap");
+            OWMService owmService = new OWMService(restTemplate);
+            model.addAttribute("weather", owmService.getWeather(weatherRequest.getCity()));
         } else if (weatherRequest.getService().equals("Gismeteo")) {
-            weather.setService("Gismeteo");
+
         }
-        weather.setCity(weatherRequest.getCity());
         return "redirect:/weather";
     }
 
