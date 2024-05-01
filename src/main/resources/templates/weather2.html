@@ -13,18 +13,18 @@
   </div>
   <div class="main_wrap">
     <div class="cardwrap">
-      <form th:action="@{/weather}" method="GET" th:object="${weather}">
+      <form th:action="@{/weather2}" method="GET" th:object="${weather}">
         <div class="form_wrap">
           <h1>Погода в городе <span th:text="*{name}"></span></h1>
           <br>
           <div class="content_wrap">
-            <p>Температура: <span th:text="*{main.temp}"></span> °C</p>
+            <p>Температура: <span th:text="*{temperature.air.C}"></span> °C</p>
           </div>
           <div class="content_wrap">
-            <p>Влажность: <span th:text="*{main.humidity}"></span> %</p>
+            <p>Влажность: <span th:text="*{humidity.percent}"></span> %</p>
           </div>
           <div class="content_wrap">
-            <p>Cервис: OpenWeatherMap</p>
+            <p>Cервис: Gismeteo</p>
           </div>
           <div class="button">
             <a class="c_button" th:href="@{/}">Обратно</a>
