@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-@Slf4j
 @Controller
 @RequestMapping("/")
 @SessionAttributes("weather")
@@ -43,18 +42,15 @@ public class WeatherController {
     public String processWeather(@Valid WeatherRequest weatherRequest, Model model){
         if (weatherRequest.getService().equals("OpenWeatherMap")) {
             OWMService owmService = new OWMService(restTemplate);
-            OWMweather owmweather = owmService.getWeather(weatherRequest.getCity());
-            model.addAttribute("weather", owmweather);
+            model.addAttribute("weather", owmService.getWeather(weatherRequest.getCity()));
             return "redirect:/weather";
         } else if (weatherRequest.getService().equals("Gismeteo")) {
             GisService gisService = new GisService(restTemplate);
-            GisWeather gisWeather = gisService.getWeather(weatherRequest.getCity());
-            model.addAttribute("weather", gisWeather);
+            model.addAttribute("weather",gisService.getWeather(weatherRequest.getCity()));
             return "redirect:/weather2";
         } else if (weatherRequest.getService().equals("VC Weather")){
             VCService vcService = new VCService(restTemplate);
-            VCWeather vcWeather = vcService.getWeather(weatherRequest.getCity());
-            model.addAttribute("weather", vcWeather);
+            model.addAttribute("weather", vcService.getWeather(weatherRequest.getCity()));
             return "redirect:/weather3";
         }
         return "redirect:/";
