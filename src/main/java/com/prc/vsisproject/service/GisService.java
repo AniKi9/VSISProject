@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class GisService extends GisWeather implements com.prc.vsisproject.service.Service {
+public class GisService implements com.prc.vsisproject.service.Service {
     private final RestTemplate restTemplate;
     public GisService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
