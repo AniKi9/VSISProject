@@ -1,11 +1,12 @@
 package com.prc.vsisproject.service;
 
+import com.prc.vsisproject.model.GisWeather;
 import com.prc.vsisproject.model.OWMweather;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class OWMService implements com.prc.vsisproject.service.Service {
+public class OWMService extends GisWeather implements com.prc.vsisproject.service.Service {
     private final String API_KEY = "8494c2f2e60ad9eb0914c6bbc02c4208";
     private final RestTemplate restTemplate;
     public OWMService(RestTemplate restTemplate){

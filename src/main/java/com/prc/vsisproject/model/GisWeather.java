@@ -1,5 +1,6 @@
 package com.prc.vsisproject.model;
 
+import com.prc.vsisproject.service.VCService;
 import lombok.Data;
 
 @Data

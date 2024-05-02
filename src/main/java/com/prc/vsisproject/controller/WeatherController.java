@@ -1,14 +1,11 @@
 package com.prc.vsisproject.controller;
 
-import com.prc.vsisproject.model.GisWeather;
-import com.prc.vsisproject.model.OWMweather;
-import com.prc.vsisproject.model.VCWeather;
 import com.prc.vsisproject.model.WeatherRequest;
 import com.prc.vsisproject.service.GisService;
 import com.prc.vsisproject.service.OWMService;
 import com.prc.vsisproject.service.VCService;
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/")
 @SessionAttributes("weather")
 public class WeatherController {
+
+    @Autowired
     final RestTemplate restTemplate;
     WeatherController(RestTemplate restTemplate){
         this.restTemplate = restTemplate;
