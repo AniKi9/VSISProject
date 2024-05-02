@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class VCService {
+public class VCService implements com.prc.vsisproject.service.Service {
     private final String API_KEY = "8T7PKD3GMTM7PWR8XZHZT3E8K";
     private final RestTemplate restTemplate;
     public VCService(RestTemplate restTemplate){
