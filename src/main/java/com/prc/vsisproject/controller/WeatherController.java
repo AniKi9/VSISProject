@@ -39,18 +39,22 @@ public class WeatherController {
 
     @PostMapping
     public String processWeather(@Valid WeatherRequest weatherRequest, Model model){
-        if (weatherRequest.getService().equals("OpenWeatherMap")) {
-            OWMService owmService = new OWMService(restTemplate);
-            model.addAttribute("weather", owmService.getWeather(weatherRequest.getCity()));
-            return "redirect:/weather";
-        } else if (weatherRequest.getService().equals("Gismeteo")) {
-            GisService gisService = new GisService(restTemplate);
-            model.addAttribute("weather",gisService.getWeather(weatherRequest.getCity()));
-            return "redirect:/weather2";
-        } else if (weatherRequest.getService().equals("VC Weather")){
-            VCService vcService = new VCService(restTemplate);
-            model.addAttribute("weather", vcService.getWeather(weatherRequest.getCity()));
-            return "redirect:/weather3";
+        switch (weatherRequest.getService()) {
+            case "OpenWeatherMap" -> {
+                OWMService owmService = new OWMService(restTemplate);
+                model.addAttribute("weather", owmService.getWeather(weatherRequest.getCity()));
+                return "redirect:/weather";
+            }
+            case "Gismeteo" -> {
+                GisService gisService = new GisService(restTemplate);
+                model.addAttribute("weather", gisService.getWeather(weatherRequest.getCity()));
+                return "redirect:/weather2";
+            }
+            case "VC Weather" -> {
+                VCService vcService = new VCService(restTemplate);
+                model.addAttribute("weather", vcService.getWeather(weatherRequest.getCity()));
+                return "redirect:/weather3";
+            }
         }
         return "redirect:/";
     }
